@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="width=device-width, user-scalable=no" /> 
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" type="text/css" href="css/jquery.mobile.css" />
+        <title>Beleza Natural</title>
+    </head>
+    <body>
+        <!-- Home -->
+        <div data-role="page" id="home">
+			<input type="button" value="login" onclick="FbLogin()" />
+        </div>        
+        
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/jquery/jquery-2.0.3.min.js"></script>
+        <script type="text/javascript" src="js/jquery/faceGap-1.0.js"></script>
+        <script type="text/javascript">
+                document.addEventListener("deviceready", onDeviceReady, false);
+                
+                function onDeviceReady() {
+                    navigator.splashscreen.hide();              
+                }
+				
+                function FbLogin(){
+                    /*Config Plugin*/
+                    var config = {
+                        app_id      : '217126741800298',
+                        secret      : 'df4a7e86d99817fbe04c71cbeff4c891',
+                        scope       : 'email',
+                        host        : 'http://www.facebook.com/', //App Domain ( Facebook Developer ).
+                        onLogin     : _onLogin,
+                        onLogout    : _onLogout
+                    };
+                    
+                    //Login Facebook
+                    $$.fn.FaceGap(config);
+                    //Logout Facebook
+                    //$$.fn.FaceGap('logout');
+                    
+                    //Callback Login
+                    function _onLogin( event ){     
+                        alert('status > '+event.status); // 1 - success, 0 - error
+                        alert('data > '+event.data); //Object response (id, name, email, etc);
+                        alert('token > '+event.token); // token user login
+                        alert('message > '+event.message);  
+                    }
+                    
+                    //Callback Logout
+                    function _onLogout( event ){
+                        alert('status > '+event.status); // 1 - success, 0 - error
+                        alert('message > '+event.message);
+                    } 
+                }                   
+                
+        </script>     
+    </body>
+</html>
